@@ -1,0 +1,7 @@
+{
+    "nltk_data": "/tmp/nltk_data",
+    "search_engine": "hybrid",
+    "search_index": "bm25_bge",
+    "search_model": "bge-small-en-v1.5-ft-hs/v0.3-onnx",
+    "search_repo": "Jack-cky/HKHS-Code-Search"
+}

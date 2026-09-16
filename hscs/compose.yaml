@@ -1,0 +1,29 @@
+name: hscs
+
+services:
+  api:
+    image: jackcky/hscs-api:latest
+    container_name: hscs-api
+    platform: linux/amd64
+    build:
+      context: ..
+      dockerfile: hscs/api/Dockerfile
+    volumes:
+      - ../checkpoints:/app/checkpoints
+    env_file:
+      - ../config/.env
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  web:
+    image: jackcky/hscs-web:latest
+    container_name: hscs-web
+    platform: linux/amd64
+    build:
+      context: ./web
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+    restart: unless-stopped
