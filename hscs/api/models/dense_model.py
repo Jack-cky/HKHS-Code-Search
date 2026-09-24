@@ -3,18 +3,19 @@ from collections import defaultdict
 
 import faiss
 import numpy as np
-from sentence_transformers import SentenceTransformer
+import onnxruntime as ort
+from tokenizers import Tokenizer
 
 
 class DenseSearchEngine:
     def __init__(self, model_card: str):
-        self.model = SentenceTransformer(
-            model_card,
-            backend="onnx",
-            model_kwargs={"provider": "CPUExecutionProvider"},
+        self.tokenizer = Tokenizer.from_file(f"{model_card}/tokenizer.json")
+        self.session = ort.InferenceSession(
+            f"{model_card}/onnx/model.onnx",
+            providers=["CPUExecutionProvider"],
         )
         self.vector_index = faiss.IndexFlatIP(
-            self.model.get_embedding_dimension()
+            self.session.get_outputs()[0].shape[-1]
         )
         self.catalogue = {}
         self.corpora = []
@@ -25,10 +26,17 @@ class DenseSearchEngine:
         query: str,
         depth: int,
     ) -> tuple[np.ndarray, np.ndarray]:
-        vectors = (
-            self.model.encode(query, convert_to_numpy=True)
-            .reshape(1, -1)
+        encoding = self.tokenizer.encode(query)
+        inputs = {
+            "input_ids": encoding.ids,
+            "attention_mask": encoding.attention_mask,
+            "token_type_ids": encoding.type_ids,
+        }
+        (hidden,) = self.session.run(
+            None,
+            {k: np.array([v], dtype=np.int64) for k, v in inputs.items()},
         )
+        vectors = np.ascontiguousarray(hidden[:, 0], dtype=np.float32)
         faiss.normalize_L2(vectors)
         scores, indices = self.vector_index.search(vectors, depth)
 
@@ -64,11 +72,12 @@ class DenseSearchEngine:
 
         return predictions
 
-    def load(self, path: str) -> None:
+    def load(self, path: str, meta: dict | None = None) -> None:
         self.vector_index = faiss.read_index(f"{path}.faiss")
 
-        with open(f"{path}.meta", "r") as f:
-            meta = json.load(f)
-            self.catalogue = meta["catalogue"]
-            self.corpora = meta["corpora"]
-            self.metadata = meta["metadata"]
+        if meta is None:
+            with open(f"{path}.meta", "r") as f:
+                meta = json.load(f)
+        self.catalogue = meta["catalogue"]
+        self.corpora = meta["corpora"]
+        self.metadata = meta["metadata"]

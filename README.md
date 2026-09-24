@@ -9,9 +9,9 @@ Make your first query with HKHS Code Search, a search engine that lets you descr
 </div>
 
 <div align="right">
-  <a href="https://jack-cky.github.io/HKHS-Code-Search/"><img src="https://custom-icon-badges.demolab.com/badge/Vite-646CFF?logo=vite&logoColor=fff"></a>
+  <a href="https://jack-cky.github.io/HKHS-Code-Search/"><img src="https://custom-icon-badges.demolab.com/badge/Vite-9135FF?logo=vite&logoColor=fff"></a>
   <a href="https://docs.google.com/spreadsheets/d/1hZBngU6REh5M9iyUclPlf8IyO3Iz3ZVW1exo_-vM1ks/pubhtml?gid=151834250&single=true"><img src="https://custom-icon-badges.demolab.com/badge/Backlog-319E4F?logo=Google-Sheets&logoColor=fff"></a>
-  <p><strong>First Published:</strong> 16 September 2026<br><strong>Last Updated:</strong> 16 September 2026</p>
+  <p><strong>First Published:</strong> 16 September 2026<br><strong>Last Updated:</strong> 24 September 2026</p>
 </div>
 
 
@@ -44,7 +44,7 @@ We evaluate against 1,153 product names held out from the search index. With fin
 
 <div align="center">
   <a href="https://jack-cky.github.io/HKHS-Code-Search/"><img src="./imgs/comparison.png" width="70%"></a>
-  <p><i>do you feel confident using HKHS Code Search now?</i></p>
+  <p><i>semantic search finds what keyword search misses.</i></p>
 </div>
 
 
@@ -52,14 +52,14 @@ We evaluate against 1,153 product names held out from the search index. With fin
 <a name="2"></a>
 
 ## Which Code Do I Declare?
-Type a description of the goods, pick a level of the hierarchy, and the search returns the relevant codes together with the official descriptions that matched.
+Type a description of the goods, pick a level of the hierarchy, and the search returns the relevant codes together with the official descriptions that matched. The results are ranked by semantic similarity, so a query like "almond milk" can surface the most relevant chapter, heading, or subheading without needing the precise tariff wording in advance. That makes it easier to narrow the declaration to the right level before submitting a customs entry.
 
 > [!NOTE]  
 > Latency is expected because HKHS Code Search relies on free-tier services, a cold start may add a few seconds to your first query.
 
 <div align="center">
   <a href="https://jack-cky.github.io/HKHS-Code-Search/"><img src="./imgs/scenario.png" width="70%"></a>
-  <p><i>whoa, awesome website! it makes my life easier.</i></p>
+  <p><i>from a rough product description to a declaration-ready shortlist of HKHS codes.</i></p>
 </div>
 
 

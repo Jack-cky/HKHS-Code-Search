@@ -14,7 +14,9 @@ COPY pyproject.toml ./
 RUN uv pip install --system --no-cache --no-compile . && \
     python -m nltk.downloader -d /usr/local/share/nltk_data wordnet && \
     chmod -R a+rX /usr/local/share/nltk_data && \
-    useradd --create-home hscs
+    useradd --create-home hscs && \
+    mkdir checkpoints && \
+    chown hscs /app /app/checkpoints
 
 USER hscs
 

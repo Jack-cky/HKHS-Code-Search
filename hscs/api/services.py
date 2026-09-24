@@ -1,5 +1,6 @@
 from functools import lru_cache
 from pathlib import Path
+from typing import Protocol
 
 import nltk
 from huggingface_hub import snapshot_download
@@ -24,7 +25,7 @@ def download_model_artefacts() -> None:
         nltk.data.path.append(settings.nltk_data)
 
         try:
-            nltk.data.find("corpora/wordnet")
+            nltk.data.find("corpora/wordnet.zip")
         except LookupError:
             nltk.download(
                 "wordnet",
@@ -33,8 +34,15 @@ def download_model_artefacts() -> None:
             )
 
 
+class SearchEngine(Protocol):
+    @property
+    def catalogue(self) -> dict[str, str]: ...
+
+    def search(self, query: str, tag: str, k: int = 10) -> list[str]: ...
+
+
 @lru_cache(maxsize=1)
-def get_engine():
+def get_engine() -> SearchEngine:
     download_model_artefacts()
 
     match settings.search_engine:

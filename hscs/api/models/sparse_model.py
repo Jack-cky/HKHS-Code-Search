@@ -67,12 +67,13 @@ class SparseSearchEngine:
 
         return predictions
 
-    def load(self, path: str) -> None:
+    def load(self, path: str, meta: dict | None = None) -> None:
         with open(f"{path}.pkl", "rb") as f:
             self.model = pickle.load(f)
 
-        with open(f"{path}.meta", "r") as f:
-            meta = json.load(f)
-            self.catalogue = meta["catalogue"]
-            self.corpora = meta["corpora"]
-            self.metadata = meta["metadata"]
+        if meta is None:
+            with open(f"{path}.meta", "r") as f:
+                meta = json.load(f)
+        self.catalogue = meta["catalogue"]
+        self.corpora = meta["corpora"]
+        self.metadata = meta["metadata"]

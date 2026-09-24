@@ -1,3 +1,4 @@
+import json
 from collections import defaultdict
 
 from .dense_model import DenseSearchEngine
@@ -51,5 +52,7 @@ class HybridSearchEngine:
         return self._fuse(sparse, dense, c=c, weights=weights)[:k]
 
     def load(self, path: str) -> None:
-        self.sparse.load(path)
-        self.dense.load(path)
+        with open(f"{path}.meta", "r") as f:
+            meta = json.load(f)
+        self.sparse.load(path, meta)
+        self.dense.load(path, meta)

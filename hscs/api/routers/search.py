@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, Query
 
 from ..schemas import Level, SearchResponse, SearchResult
-from ..services import get_engine
+from ..services import SearchEngine, get_engine
 
 router = APIRouter(tags=["search"])
 
@@ -18,7 +18,7 @@ def profile_hierarchy(code: str, catalogue: dict[str, str]) -> list[str]:
 
 @router.get("/search", response_model=SearchResponse)
 def search(
-    engine: Annotated[object, Depends(get_engine)],
+    engine: Annotated[SearchEngine, Depends(get_engine)],
     q: Annotated[str, Query(min_length=1, max_length=50)],
     level: Level,
     k: Annotated[int, Query(ge=1, le=30)] = 10,
