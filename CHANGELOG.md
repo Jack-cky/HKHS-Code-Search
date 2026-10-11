@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.3] - 2026-10-11
+
+Updated the API container build and project version.
+
+### Changed
+
+- Mounted `uv` during the API image build and configured system-wide, cache-free dependency installation.
+- Bumped the package version to 1.0.3.
+
 ## [1.0.2] - 2026-09-24
 
 Improved search inference performance and container optimisation.
