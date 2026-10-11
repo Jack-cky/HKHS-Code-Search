@@ -11,7 +11,7 @@ Make your first query with HKHS Code Search, a search engine that lets you descr
 <div align="right">
   <a href="https://jack-cky.github.io/HKHS-Code-Search/"><img src="https://custom-icon-badges.demolab.com/badge/Vite-9135FF?logo=vite&logoColor=fff"></a>
   <a href="https://docs.google.com/spreadsheets/d/1hZBngU6REh5M9iyUclPlf8IyO3Iz3ZVW1exo_-vM1ks/pubhtml?gid=151834250&single=true"><img src="https://custom-icon-badges.demolab.com/badge/Backlog-319E4F?logo=Google-Sheets&logoColor=fff"></a>
-  <p><strong>First Published:</strong> 16 September 2026<br><strong>Last Updated:</strong> 24 September 2026</p>
+  <p><strong>First Published:</strong> 16 September 2026<br><strong>Last Updated:</strong> 11 October 2026</p>
 </div>
 
 
